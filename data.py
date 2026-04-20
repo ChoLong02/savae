@@ -82,7 +82,6 @@ def impute_data(df, mode='stats'):
 # -----------------------------------------------------------
 #                   DATA NORMALIZATION
 # -----------------------------------------------------------
-
 def get_feat_distributions(df, time=None):
     n_feat = df.shape[1]
     feat_dist = []
@@ -101,8 +100,13 @@ def get_feat_distributions(df, time=None):
             # Check if values are floats but don't have decimals and transform to int. They are floats because of NaNs
             if no_nan_values.dtype == 'float64':
                 no_nan_values = no_nan_values.astype(int)
-            if np.unique(no_nan_values).size < 30 and np.amin(no_nan_values) == 0:
-                feat_dist.append(('categorical', np.max(no_nan_values) + 1))
+            # if np.unique(no_nan_values).size < 30 and np.amin(no_nan_values) == 0:  # original
+            if np.unique(no_nan_values).size < 30:
+                # feat_dist.append(('categorical', np.max(no_nan_values) + 1))  # original
+
+                # NSCLC를 위해서 Overall.stage랑 T.stage가 1로시작해서...
+                n_classes = int(np.max(no_nan_values) - np.amin(no_nan_values) + 1)
+                feat_dist.append(('categorical', n_classes))
             else:
                 feat_dist.append(('gaussian', 2))
         else:

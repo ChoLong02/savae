@@ -11,6 +11,7 @@ import pandas as pd
 
 from scipy import stats
 from sklearn.svm import SVR
+from sklearn.preprocessing import StandardScaler
 from sklearn.experimental import enable_iterative_imputer
 from sklearn.impute import IterativeImputer
 from sklearn.linear_model import BayesianRidge
@@ -187,3 +188,4 @@ def split_cv_data(real_df, n_folds, time_dist=None):
             cv_data = append_data(train_data, test_data, train_mask, test_mask, cv_data)
 
     return cv_data, feat_distributions
+    

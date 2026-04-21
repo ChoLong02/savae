@@ -1,3 +1,6 @@
+# 화순 전대병원 데이터셋으로 중앙화(SAVAE) 실험
+#  ㄴ 전처리는 기존 저자랑 동일한 방법
+
 import torch
 import numpy as np
 import pandas as pd
